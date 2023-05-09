@@ -119,14 +119,25 @@ public class GameWindows extends Frame implements Runnable {
     }
 
     void checkCollide() {
+        List<GameObject> destroyList = new ArrayList<>();
         for (int i = 0; i < listGameObject.size(); i++) {
-            for (int j = 0; j < listGameObject.size(); j++) {
-                if (i != j) {
-                    if (listGameObject.get(i).isCollide(listGameObject.get(j))) {
-                        System.out.println("Collision detected");
+            for (int j = i + 1; j < listGameObject.size(); j++) {
+                if (listGameObject.get(i).isCollide(listGameObject.get(j))) {
+                    GameObject destroyGO = listGameObject.get(i).collideWith(listGameObject.get(j));
+                    if (destroyGO != null) {
+                        destroyList.add(destroyGO);
+                    }
+                }
+                if (listGameObject.get(j).isCollide(listGameObject.get(i))) {
+                    GameObject destroyGO = listGameObject.get(j).collideWith(listGameObject.get(i));
+                    if (destroyGO != null) {
+                        destroyList.add(destroyGO);
                     }
                 }
             }
+        }
+        for (GameObject gameObject: destroyList) {
+            listGameObject.remove(gameObject);
         }
     }
 

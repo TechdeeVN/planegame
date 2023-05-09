@@ -14,4 +14,9 @@ public class EnemyShip extends GameObject {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    GameObject collideWith(GameObject target) {
+        return null;
+    }
 }

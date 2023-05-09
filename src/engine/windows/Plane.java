@@ -119,7 +119,18 @@ public class Plane extends GameObject {
             for (int i = 0; i < 7; i++) {
                 explodingImages.add(assets.getSubimage(i * 66 + 4, 301, 65, 65));
             }
-            explodeAnimation = new Animation(750, explodingImages, true);
+            explodeAnimation = new Animation(
+                    750,
+                    explodingImages,
+                    false,
+                    new AnimationFinnishListener() {
+                        @Override
+                        public void onAnimationFinished() {
+                            System.out.println("onAnimationFinished");
+                        }
+                    }
+            );
+            System.out.println("explode");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -146,9 +157,9 @@ public class Plane extends GameObject {
 
     public void hitWithBullet(Bullet bullet) {
         //trừ máu
-        this.healthPoint -= bullet.dam;
+        this.currentHp -= bullet.dam;
         //Nếu hết máu thì hiện animation nổ
-        if (this.healthPoint <= 0) {
+        if (this.currentHp <= 0) {
             this.explode();
         }
     }
@@ -187,6 +198,15 @@ public class Plane extends GameObject {
 
         this.position.x += (goRight - goLeft) * speed;
         this.position.y += (goDown - goUp) * speed;
+    }
+
+    @Override
+    GameObject collideWith(GameObject target) {
+        if (target instanceof Bullet) {
+            this.hitWithBullet((Bullet) target);
+            return target;
+        }
+        return this;
     }
 
     public void deductCurrentHp(int amount) {

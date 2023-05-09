@@ -31,4 +31,13 @@ public class Bullet extends GameObject {
         this.position.y -= speed / UPDATE_PER_SECOND;
     }
 
+    @Override
+    GameObject collideWith(GameObject target) {
+        if (target instanceof Plane) {
+            ((Plane) target).hitWithBullet(this);
+            return this;
+        }
+        return null;
+    }
+
 }

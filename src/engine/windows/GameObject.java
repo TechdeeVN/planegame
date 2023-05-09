@@ -3,7 +3,7 @@ package engine.windows;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class GameObject {
+public abstract class GameObject {
     protected Position position;
     protected BufferedImage image;
 
@@ -15,6 +15,8 @@ public class GameObject {
 
     public void update() {
     }
+
+    abstract GameObject collideWith(GameObject target);
 
     public void draw(Graphics g) {
         g.drawImage(image, position.x, position.y, null);
