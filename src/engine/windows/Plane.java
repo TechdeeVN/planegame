@@ -122,14 +122,7 @@ public class Plane extends GameObject {
             explodeAnimation = new Animation(
                     750,
                     explodingImages,
-                    false,
-                    new AnimationFinishListener() {
-                        @Override
-                        public void onAnimationFinished() {
-                            System.out.println("onAnimationFinished");
-                        }
-                    },
-                    this
+                    false
             );
             System.out.println("explode");
         } catch (IOException e) {
@@ -195,14 +188,13 @@ public class Plane extends GameObject {
 
         if (exploding) {
             this.image = explodeAnimation.getCurrentImage();
+            if(explodeAnimation.isFinished()) {
+                destroyGameObject();
+            }
         }
 
         this.position.x += (goRight - goLeft) * speed;
         this.position.y += (goDown - goUp) * speed;
-
-        if(explodeAnimation != null && explodeAnimation.isFinished()) {
-            this.destroyGameObject();
-        }
     }
 
     @Override
