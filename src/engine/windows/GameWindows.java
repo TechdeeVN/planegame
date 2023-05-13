@@ -36,6 +36,8 @@ public class GameWindows extends Frame implements Runnable {
                 4
         ));
 
+        listGameObject.add(new EnemyPlane(new Position(150, 200)));
+
         Plane playerPlane = new Plane(
                 new Position(300, 300),
                 300,

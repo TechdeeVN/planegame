@@ -16,7 +16,6 @@ public class EnemySubmarine extends GameObject {
     }
 
     @Override
-    GameObject collideWith(GameObject target) {
-        return null;
+    void collideWith(GameObject target) {
     }
 }

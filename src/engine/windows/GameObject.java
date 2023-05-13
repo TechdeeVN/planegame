@@ -16,7 +16,7 @@ public abstract class GameObject {
     public void update() {
     }
 
-    abstract GameObject collideWith(GameObject target);
+    abstract void collideWith(GameObject target);
 
     public void draw(Graphics g) {
         g.drawImage(image, position.x, position.y, null);

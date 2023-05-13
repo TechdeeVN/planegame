@@ -206,12 +206,10 @@ public class Plane extends GameObject {
     }
 
     @Override
-    GameObject collideWith(GameObject target) {
+    void collideWith(GameObject target) {
         if (target instanceof Bullet) {
             this.hitWithBullet((Bullet) target);
-            return target;
         }
-        return this;
     }
 
     public void deductCurrentHp(int amount) {

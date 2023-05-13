@@ -32,9 +32,8 @@ public class Bullet extends GameObject {
     }
 
     @Override
-    GameObject collideWith(GameObject target) {
+    void collideWith(GameObject target) {
         this.destroyGameObject();
-        return null;
     }
 
 }

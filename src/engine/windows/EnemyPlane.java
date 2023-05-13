@@ -16,7 +16,14 @@ public class EnemyPlane extends GameObject {
     }
 
     @Override
-    GameObject collideWith(GameObject target) {
-        return null;
+    void collideWith(GameObject target) {
+        if(target instanceof Bullet) {
+            hitByBullet((Bullet) target);
+        }
+    }
+
+    private void hitByBullet(Bullet b) {
+        System.out.println("HIT!");
+        destroyGameObject();
     }
 }
