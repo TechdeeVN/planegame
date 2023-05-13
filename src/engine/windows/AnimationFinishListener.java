@@ -1,5 +1,5 @@
 package engine.windows;
 
-public interface AnimationFinnishListener {
+public interface AnimationFinishListener {
     void onAnimationFinished();
 }

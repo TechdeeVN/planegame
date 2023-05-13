@@ -33,10 +33,7 @@ public class Bullet extends GameObject {
 
     @Override
     GameObject collideWith(GameObject target) {
-        if (target instanceof Plane) {
-            ((Plane) target).hitWithBullet(this);
-            return this;
-        }
+        this.destroyGameObject();
         return null;
     }
 

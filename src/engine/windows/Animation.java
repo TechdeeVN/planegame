@@ -7,7 +7,7 @@ public class Animation {
     public static final int UPDATE_PER_SECOND = 60;
     float animationTime; //in milliseconds
 
-    AnimationFinnishListener animationFinnishListener;
+    AnimationFinishListener animationFinnishListener;
 
     int frameCount;
 
@@ -17,22 +17,25 @@ public class Animation {
 
     boolean finished;
 
+    GameObject gameObject;
+
     public Animation(
             float animationTime,
             List<BufferedImage> imageList,
             boolean loop,
-            AnimationFinnishListener animationFinnishListener
+            AnimationFinishListener animationFinnishListener,
+            GameObject gameObject
             ) {
         this.animationTime = animationTime;
         this.imageList = imageList;
         this.frameCount = 0;
         this.loop = loop;
+        this.gameObject = gameObject;
         this.animationFinnishListener = animationFinnishListener;
     }
 
     public BufferedImage getCurrentImage() {
         if (finished) {
-            this.animationFinnishListener.onAnimationFinished();
             return imageList.get(imageList.size() - 1);
         }
 
@@ -45,6 +48,8 @@ public class Animation {
             } else {
                 finished = true;
                 frameIndex = imageList.size() - 1;
+//                gameObject.destroyGameObject();
+                this.animationFinnishListener.onAnimationFinished();
             }
         }
         return imageList.get(frameIndex);

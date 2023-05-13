@@ -39,7 +39,7 @@ public class GameWindows extends Frame implements Runnable {
         Plane playerPlane = new Plane(
                 new Position(300, 300),
                 300,
-                15,
+                150,
                 4,
                 1
         );
@@ -83,18 +83,46 @@ public class GameWindows extends Frame implements Runnable {
     @Override
     public void update(Graphics g) {
         checkCollide();
+        for (GameObject gameObject : listGameObject) {
+            gameObject.update();
+        }
+        removeDestroyedGameObjects();
+        drawBufferImage(g);
+    }
+
+    private void drawBufferImage(Graphics g) {
         if (image == null) {
             image = createImage(this.getWidth(), this.getHeight());
             //Tạo một 1 graphics ẩn
             second = image.getGraphics();
             //Lấy graphics ẩn
         }
+        //Paint buffer image
         paint(second);
-        for (GameObject gameObject : listGameObject) {
-            gameObject.update();
-        }
-        //Vẽ trên graphics ẩn
         g.drawImage(image, 0, 0, null);
+    }
+
+    private void removeDestroyedGameObjects() {
+        List<GameObject> destroyedObjects = new ArrayList<>();
+        for (GameObject gameObject : listGameObject) {
+            if(gameObject.isDestroy()) {
+                destroyedObjects.add(gameObject);
+            }
+        }
+        listGameObject.removeAll(destroyedObjects);
+    }
+
+    void checkCollide() {
+        for (int i = 0; i < listGameObject.size(); i++) {
+            for (int j = i + 1; j < listGameObject.size(); j++) {
+                GameObject gameObjectA = listGameObject.get(i);
+                GameObject gameObjectB = listGameObject.get(j);
+                if (gameObjectA.isCollide(gameObjectB)) {
+                    gameObjectA.collideWith(gameObjectB);
+                    gameObjectB.collideWith(gameObjectA);
+                }
+            }
+        }
     }
 
     @Override
@@ -115,29 +143,6 @@ public class GameWindows extends Frame implements Runnable {
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-        }
-    }
-
-    void checkCollide() {
-        List<GameObject> destroyList = new ArrayList<>();
-        for (int i = 0; i < listGameObject.size(); i++) {
-            for (int j = i + 1; j < listGameObject.size(); j++) {
-                if (listGameObject.get(i).isCollide(listGameObject.get(j))) {
-                    GameObject destroyGO = listGameObject.get(i).collideWith(listGameObject.get(j));
-                    if (destroyGO != null) {
-                        destroyList.add(destroyGO);
-                    }
-                }
-                if (listGameObject.get(j).isCollide(listGameObject.get(i))) {
-                    GameObject destroyGO = listGameObject.get(j).collideWith(listGameObject.get(i));
-                    if (destroyGO != null) {
-                        destroyList.add(destroyGO);
-                    }
-                }
-            }
-        }
-        for (GameObject gameObject: destroyList) {
-            listGameObject.remove(gameObject);
         }
     }
 
