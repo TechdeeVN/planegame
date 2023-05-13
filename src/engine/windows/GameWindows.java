@@ -6,6 +6,12 @@
 package engine.windows;
 
 
+import engine.windows.common.Position;
+import engine.windows.node.Background;
+import engine.windows.node.GameObject;
+import engine.windows.node.enemy.EnemyPlane;
+import engine.windows.node.player.Plane;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -17,7 +23,6 @@ import java.util.List;
  * @author Tdh4vn
  */
 public class GameWindows extends Frame implements Runnable {
-
 
     private static final int UPDATE_PER_SECOND = 60;
     List<GameObject> listGameObject;

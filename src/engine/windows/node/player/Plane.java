@@ -1,4 +1,9 @@
-package engine.windows;
+package engine.windows.node.player;
+
+import engine.windows.common.Animation;
+import engine.windows.node.Bullet;
+import engine.windows.common.Position;
+import engine.windows.node.GameObject;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -151,7 +156,7 @@ public class Plane extends GameObject {
 
     public void hitWithBullet(Bullet bullet) {
         //trừ máu
-        this.currentHp -= bullet.dam;
+        this.currentHp -= bullet.getDamage();
         //Nếu hết máu thì hiện animation nổ
         if (this.currentHp <= 0) {
             this.explode();
@@ -198,7 +203,7 @@ public class Plane extends GameObject {
     }
 
     @Override
-    void collideWith(GameObject target) {
+    public void collideWith(GameObject target) {
         if (target instanceof Bullet) {
             this.hitWithBullet((Bullet) target);
         }

@@ -1,4 +1,4 @@
-package engine.windows;
+package engine.windows.common;
 
 public class Position {
     public int x;

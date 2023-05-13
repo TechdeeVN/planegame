@@ -1,4 +1,4 @@
-package engine.windows;
+package engine.windows.node;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

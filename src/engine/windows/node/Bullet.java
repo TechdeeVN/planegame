@@ -1,4 +1,6 @@
-package engine.windows;
+package engine.windows.node;
+
+import engine.windows.common.Position;
 
 import javax.imageio.ImageIO;
 import java.io.File;
@@ -7,11 +9,11 @@ import java.io.IOException;
 public class Bullet extends GameObject {
     private static final int UPDATE_PER_SECOND = 60;
 
-    int dam = 0;
+    private int damage = 0;
 
-    private final int speed; //pixel per seconds
+    private int speed; //pixel per seconds
 
-    public Bullet(Position anchorPosition, int speed, int dam) {
+    public Bullet(Position anchorPosition, int speed, int damage) {
         super(anchorPosition);
         //Anchor Position: center of the bullet
         try {
@@ -23,7 +25,7 @@ public class Bullet extends GameObject {
         this.position.x -= image.getWidth() / 2;
         this.position.y -= image.getHeight();
         this.speed = speed;
-        this.dam = dam;
+        this.damage = damage;
     }
 
     @Override
@@ -32,8 +34,19 @@ public class Bullet extends GameObject {
     }
 
     @Override
-    void collideWith(GameObject target) {
+    public void collideWith(GameObject target) {
         this.destroyGameObject();
     }
 
+    public int getDamage() {
+        return damage;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
 }

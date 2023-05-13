@@ -1,4 +1,8 @@
-package engine.windows;
+package engine.windows.node.enemy;
+
+import engine.windows.node.Bullet;
+import engine.windows.common.Position;
+import engine.windows.node.GameObject;
 
 import javax.imageio.ImageIO;
 import java.io.File;
@@ -16,7 +20,7 @@ public class EnemyPlane extends GameObject {
     }
 
     @Override
-    void collideWith(GameObject target) {
+    public void collideWith(GameObject target) {
         if(target instanceof Bullet) {
             hitByBullet((Bullet) target);
         }
@@ -25,5 +29,10 @@ public class EnemyPlane extends GameObject {
     private void hitByBullet(Bullet b) {
         System.out.println("HIT!");
         destroyGameObject();
+    }
+
+    @Override
+    public void update() {
+
     }
 }

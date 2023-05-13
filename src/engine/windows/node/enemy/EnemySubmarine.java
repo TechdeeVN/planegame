@@ -1,4 +1,7 @@
-package engine.windows;
+package engine.windows.node.enemy;
+
+import engine.windows.common.Position;
+import engine.windows.node.GameObject;
 
 import javax.imageio.ImageIO;
 import java.io.File;
@@ -16,6 +19,6 @@ public class EnemySubmarine extends GameObject {
     }
 
     @Override
-    void collideWith(GameObject target) {
+    public void collideWith(GameObject target) {
     }
 }

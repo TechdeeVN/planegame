@@ -1,4 +1,6 @@
-package engine.windows;
+package engine.windows.node;
+
+import engine.windows.common.Position;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -16,7 +18,7 @@ public abstract class GameObject {
     public void update() {
     }
 
-    abstract void collideWith(GameObject target);
+    abstract public void collideWith(GameObject target);
 
     public void draw(Graphics g) {
         g.drawImage(image, position.x, position.y, null);
