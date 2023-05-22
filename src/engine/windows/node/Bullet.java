@@ -35,7 +35,9 @@ public class Bullet extends GameObject {
 
     @Override
     public void collideWith(GameObject target) {
-        this.destroyGameObject();
+        if(!(target instanceof Bullet)) {
+            this.destroyGameObject();
+        }
     }
 
     public int getDamage() {

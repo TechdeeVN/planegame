@@ -5,6 +5,8 @@
  */
 package engine.windows;
 
+import engine.windows.node.scenes.MenuScene;
+
 import java.io.IOException;
 
 /**
@@ -14,6 +16,8 @@ public class Main {
     public static void main(String[] args) throws IOException {
         //Start Game Windows
         GameWindows gameWindows = new GameWindows();
+        MenuScene menuScene = new MenuScene(gameWindows);
+        gameWindows.getSceneStack().push(menuScene);
         gameWindows.start();
     }
 }

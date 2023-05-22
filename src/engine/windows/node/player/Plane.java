@@ -1,8 +1,8 @@
 package engine.windows.node.player;
 
 import engine.windows.common.Animation;
-import engine.windows.node.Bullet;
 import engine.windows.common.Position;
+import engine.windows.node.Bullet;
 import engine.windows.node.GameObject;
 
 import javax.imageio.ImageIO;
@@ -17,8 +17,6 @@ import java.util.List;
 
 public class Plane extends GameObject {
     private static final int UPDATE_PER_SECOND = 60;
-
-    private int healthPoint;
     private final int damage;
     private final int speed; // speed * 100 pixel per seconds
     private final int type;
@@ -28,6 +26,7 @@ public class Plane extends GameObject {
     int goDown;
     int goLeft;
     int goRight;
+    private int healthPoint;
     private int currentHp;
     private KeyListener keyListener;
     private Animation explodeAnimation;
@@ -129,7 +128,6 @@ public class Plane extends GameObject {
                     explodingImages,
                     false
             );
-            System.out.println("explode");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -160,6 +158,7 @@ public class Plane extends GameObject {
         //Nếu hết máu thì hiện animation nổ
         if (this.currentHp <= 0) {
             this.explode();
+            this.collidable = false;
         }
     }
 
@@ -193,7 +192,7 @@ public class Plane extends GameObject {
 
         if (exploding) {
             this.image = explodeAnimation.getCurrentImage();
-            if(explodeAnimation.isFinished()) {
+            if (explodeAnimation.isFinished()) {
                 destroyGameObject();
             }
         }

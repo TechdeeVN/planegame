@@ -9,6 +9,8 @@ public abstract class GameObject {
     protected Position position;
     protected BufferedImage image;
 
+    protected boolean collidable = true;
+
     private boolean isDestroyed = false;
 
     public GameObject(Position position) {
@@ -37,6 +39,8 @@ public abstract class GameObject {
     }
 
     public boolean isCollide(GameObject gameObject) {
+        if(!this.collidable || !gameObject.collidable) return false;
+
         int x1 = this.position.x;
         int y1 = this.position.y;
         int width1 = this.image.getWidth();
