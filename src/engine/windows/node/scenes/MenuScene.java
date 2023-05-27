@@ -18,13 +18,6 @@ public class MenuScene extends Scene {
 
             @Override
             public void mousePressed(MouseEvent e) {
-                if (e.getX() > 200 && e.getX() < 400 && e.getY() > 200 && e.getY() < 250) {
-                    gameWindows.getSceneStack().push(new BattleScene(gameWindows));
-                }
-
-                if (e.getX() > 200 && e.getX() < 400 && e.getY() > 400 && e.getY() < 450) {
-                    System.exit(0);
-                }
             }
 
             @Override
