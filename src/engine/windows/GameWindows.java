@@ -27,7 +27,6 @@ public class GameWindows extends Frame implements Runnable {
         sceneStack = new Stack<>();
         this.setSize(480, 800);
         this.setTitle("Techdee");
-        this.setUndecorated(true);
         this.setFocusable(true);
         this.setVisible(true);
         this.setResizable(false);
